@@ -137,6 +137,7 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
                 alt="Sanghi City"
                 className="mobile-drawer-secondary-logo"
               />
+              <div className="mobile-drawer-divider" aria-hidden="true" />
               <img
                 src={CLOUDINARY_MEDIA.logo}
                 alt="Ambhuja by Maytri"
