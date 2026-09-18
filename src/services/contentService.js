@@ -160,16 +160,35 @@ export async function fetchWebsiteContent() {
     if (!res.ok) throw new Error('API fetch failed');
     const json = await res.json();
     if (json.success && json.data) {
+      const dbData = json.data;
+
+      // For sections with dynamic items arrays, prefer DB items if they exist and are non-empty.
+      // Only fall back to DEFAULT_CONTENT items when DB has no items yet.
+      const dbProjectItems = dbData.projectsSection?.items;
+      const dbAmenityItems = dbData.amenitiesSection?.items;
+
       cachedContent = {
         ...DEFAULT_CONTENT,
-        ...json.data,
-        hero: { ...DEFAULT_CONTENT.hero, ...(json.data.hero || {}) },
-        about: { ...DEFAULT_CONTENT.about, ...(json.data.about || {}) },
-        clubhouse: { ...DEFAULT_CONTENT.clubhouse, ...(json.data.clubhouse || {}) },
-        contact: { ...DEFAULT_CONTENT.contact, ...(json.data.contact || {}) },
-        brochure: { ...DEFAULT_CONTENT.brochure, ...(json.data.brochure || {}) },
-        amenitiesSection: { ...DEFAULT_CONTENT.amenitiesSection, ...(json.data.amenitiesSection || {}) },
-        projectsSection: { ...DEFAULT_CONTENT.projectsSection, ...(json.data.projectsSection || {}) }
+        ...dbData,
+        hero: { ...DEFAULT_CONTENT.hero, ...(dbData.hero || {}) },
+        about: { ...DEFAULT_CONTENT.about, ...(dbData.about || {}) },
+        clubhouse: { ...DEFAULT_CONTENT.clubhouse, ...(dbData.clubhouse || {}) },
+        contact: { ...DEFAULT_CONTENT.contact, ...(dbData.contact || {}) },
+        brochure: { ...DEFAULT_CONTENT.brochure, ...(dbData.brochure || {}) },
+        amenitiesSection: {
+          ...DEFAULT_CONTENT.amenitiesSection,
+          ...(dbData.amenitiesSection || {}),
+          items: (Array.isArray(dbAmenityItems) && dbAmenityItems.length > 0)
+            ? dbAmenityItems
+            : DEFAULT_CONTENT.amenitiesSection.items
+        },
+        projectsSection: {
+          ...DEFAULT_CONTENT.projectsSection,
+          ...(dbData.projectsSection || {}),
+          items: (Array.isArray(dbProjectItems) && dbProjectItems.length > 0)
+            ? dbProjectItems
+            : DEFAULT_CONTENT.projectsSection.items
+        }
       };
       listeners.forEach(fn => fn(cachedContent));
       return cachedContent;
@@ -179,6 +198,7 @@ export async function fetchWebsiteContent() {
   }
   return cachedContent || DEFAULT_CONTENT;
 }
+
 
 export function useWebsiteContent() {
   const [content, setContent] = useState(cachedContent || DEFAULT_CONTENT);
