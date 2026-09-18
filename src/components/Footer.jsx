@@ -130,14 +130,24 @@ export default function Footer({ onOpenPrivacy }) {
                   src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
                   alt="Sanghi City Logo"
                   className="footer-secondary-logo-img"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== window.location.origin + '/sanghicity-logo.png') {
+                      e.currentTarget.src = '/sanghicity-logo.png';
+                    }
+                  }}
                 />
               </a>
               <div className="footer-brand-divider" aria-hidden="true" />
               <a href="#home" title="Maytri Ambhuja">
                 <img
-                  src={media.logo || CLOUDINARY_MEDIA.logo}
+                  src={media.logo || CLOUDINARY_MEDIA.logo || '/ambhuja-logo.png'}
                   alt="Maytri Ambhuja Logo"
                   className="footer-logo-img"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== window.location.origin + '/ambhuja-logo.png') {
+                      e.currentTarget.src = '/ambhuja-logo.png';
+                    }
+                  }}
                 />
               </a>
             </div>

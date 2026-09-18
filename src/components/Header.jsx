@@ -60,6 +60,11 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
               src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
               alt="Sanghi City Logo"
               className="header-secondary-logo-img"
+              onError={(e) => {
+                if (e.currentTarget.src !== window.location.origin + '/sanghicity-logo.png') {
+                  e.currentTarget.src = '/sanghicity-logo.png';
+                }
+              }}
             />
           </a>
 
@@ -67,9 +72,14 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
 
           <a href="#home" className="header-brand" onClick={(e) => handleNavClick(e, '#home')} title="Ambhuja by Maytri">
             <img
-              src={media.logo || CLOUDINARY_MEDIA.logo}
+              src={media.logo || CLOUDINARY_MEDIA.logo || '/ambhuja-logo.png'}
               alt="Ambhuja by Maytri Logo"
               className="header-logo-img"
+              onError={(e) => {
+                if (e.currentTarget.src !== window.location.origin + '/ambhuja-logo.png') {
+                  e.currentTarget.src = '/ambhuja-logo.png';
+                }
+              }}
             />
           </a>
         </div>
@@ -137,12 +147,22 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
                 src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
                 alt="Sanghi City"
                 className="mobile-drawer-secondary-logo"
+                onError={(e) => {
+                  if (e.currentTarget.src !== window.location.origin + '/sanghicity-logo.png') {
+                    e.currentTarget.src = '/sanghicity-logo.png';
+                  }
+                }}
               />
               <div className="mobile-drawer-divider" aria-hidden="true" />
               <img
-                src={media.logo || CLOUDINARY_MEDIA.logo}
+                src={media.logo || CLOUDINARY_MEDIA.logo || '/ambhuja-logo.png'}
                 alt="Ambhuja by Maytri"
                 className="mobile-drawer-logo"
+                onError={(e) => {
+                  if (e.currentTarget.src !== window.location.origin + '/ambhuja-logo.png') {
+                    e.currentTarget.src = '/ambhuja-logo.png';
+                  }
+                }}
               />
             </div>
             <button 

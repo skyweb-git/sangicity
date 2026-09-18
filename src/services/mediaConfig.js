@@ -91,7 +91,7 @@ const CLD = 'https://res.cloudinary.com/li8lgd5l/image/upload';
 
 export const CLOUDINARY_MEDIA = {
   // Brand & Logos
-  logo: `${CLD}/v1789727192/maytri_ambhuja/brand/ambhuja_logo.png`,
+  logo: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786505/maytri_ambhuja/brand/ambhuja_logo.png',
   sanghiLogo: `${CLD}/v1789729319/maytri_ambhuja/sanghiLogo.jpg`,
   heroPoster: `${CLD}/v1789727192/maytri_ambhuja/brand/hero_poster.jpg`,
   heroBgImage: `${CLD}/v1789727192/maytri_ambhuja/brand/hero_poster.jpg`,
