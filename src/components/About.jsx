@@ -1,10 +1,11 @@
 import React from 'react';
 import { Award, ShieldCheck, ArrowUpRight } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 import { useWebsiteContent } from '../services/contentService';
 
 export default function About({ onOpenEnquiry }) {
   const websiteContent = useWebsiteContent();
+  const media = useWebsiteMedia();
   const aboutData = websiteContent?.about || {};
   const heroData = websiteContent?.hero || {};
 
@@ -70,7 +71,7 @@ export default function About({ onOpenEnquiry }) {
           <div className="about-visual">
             <div className="about-card-frame">
               <img
-                src={CLOUDINARY_MEDIA.gallery[4].url}
+                src={media.elevations?.elevation01 || media.gallery?.[4]?.url || CLOUDINARY_MEDIA.gallery[4].url}
                 alt="Maytri Ambhuja luxury villa exterior architecture in Hyderabad"
                 className="about-img"
                 loading="lazy"

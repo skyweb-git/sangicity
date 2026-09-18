@@ -1,28 +1,47 @@
 import React from 'react';
 import { Map, Building2, Trees, ShieldCheck, Home } from 'lucide-react';
+import { useWebsiteContent } from '../services/contentService';
 
 export default function ProjectHighlights() {
+  const content = useWebsiteContent();
+  const about = content?.about || {};
+
+  const acresRaw = about.totalAcres || '55 Acres';
+  const acresMatch = acresRaw.match(/^([0-9.,+]+)\s*(.*)$/);
+  const acresVal = acresMatch ? acresMatch[1] : '55';
+  const acresUnit = acresMatch && acresMatch[2] ? acresMatch[2] : 'Acres';
+
+  const villasRaw = about.totalVillas || '516 Villas';
+  const villasMatch = villasRaw.match(/^([0-9.,+]+)\s*(.*)$/);
+  const villasVal = villasMatch ? villasMatch[1] : '516';
+  const villasUnit = villasMatch && villasMatch[2] ? villasMatch[2] : 'Villas';
+
+  const clubhouseRaw = about.clubhouseSize || '90,000 Sft';
+  const clubhouseMatch = clubhouseRaw.match(/^([0-9.,+]+)\s*(.*)$/);
+  const clubhouseVal = clubhouseMatch ? clubhouseMatch[1] : '90,000';
+  const clubhouseUnit = clubhouseMatch && clubhouseMatch[2] ? clubhouseMatch[2] : 'Sft';
+
   const stats = [
     {
-      value: '55',
-      unit: 'Acres',
+      value: acresVal,
+      unit: acresUnit,
       label: 'Project Areas',
       icon: Map,
       description: 'Expansive master-planned villa township near ORR Exit 11'
     },
     {
-      value: '516',
-      unit: 'Villas',
+      value: villasVal,
+      unit: villasUnit,
       label: 'Premium Villas',
       icon: Home,
       description: 'Ultra-luxury 222 & 300 SQ YDS Triplex Villa residences'
     },
     {
-      value: '90,000',
-      unit: 'Sft',
+      value: clubhouseVal,
+      unit: clubhouseUnit,
       label: 'Club House',
       icon: Building2,
-      description: 'Hyderabad\'s finest grand clubhouse with world-class leisure'
+      description: "Hyderabad's finest grand clubhouse with world-class leisure"
     },
     {
       value: '100%',

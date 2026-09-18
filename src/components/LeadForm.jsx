@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Phone, Mail, Calendar, Download, CheckCircle2, AlertCircle, ArrowUpRight, ShieldCheck } from 'lucide-react';
 import { saveLead } from '../services/leadStorage';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 
 // Production configuration endpoint for CRM/Email integration
 export const FORM_ENDPOINT = ""; // Set your API endpoint here (e.g. "/api/enquiry" or formspree URL)
 
 export default function LeadForm({ onOpenBrochure }) {
+  const media = useWebsiteMedia();
   const [formData, setFormData] = useState({
     fullName: '',
     phone: '',
@@ -104,7 +105,8 @@ export default function LeadForm({ onOpenBrochure }) {
       <div className="lead-media-wrapper">
         <video
           className="lead-media-bg"
-          src={CLOUDINARY_MEDIA.ctaVideo}
+          src={media.ctaVideo || CLOUDINARY_MEDIA.ctaVideo}
+          poster={media.ctaPoster || CLOUDINARY_MEDIA.ctaPoster}
           autoPlay
           loop
           muted

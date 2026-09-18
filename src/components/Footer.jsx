@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Phone, Mail, Globe, ArrowUp, MapPin, Navigation, ExternalLink, Star, Info } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 import { useWebsiteContent } from '../services/contentService';
 
 export default function Footer({ onOpenPrivacy }) {
   const websiteContent = useWebsiteContent();
+  const media = useWebsiteMedia();
   const contactData = websiteContent?.contact || {};
   const heroData = websiteContent?.hero || {};
 
@@ -126,7 +127,7 @@ export default function Footer({ onOpenPrivacy }) {
             <div className="footer-brand-logos">
               <a href="#home" title="Sanghi City">
                 <img
-                  src={CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
+                  src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
                   alt="Sanghi City Logo"
                   className="footer-secondary-logo-img"
                 />
@@ -134,7 +135,7 @@ export default function Footer({ onOpenPrivacy }) {
               <div className="footer-brand-divider" aria-hidden="true" />
               <a href="#home" title="Maytri Ambhuja">
                 <img
-                  src={CLOUDINARY_MEDIA.logo}
+                  src={media.logo || CLOUDINARY_MEDIA.logo}
                   alt="Maytri Ambhuja Logo"
                   className="footer-logo-img"
                 />

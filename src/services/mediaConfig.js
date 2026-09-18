@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 // Cloudinary Media Configuration & Dynamic Cloud Fetcher
 // Connected to Cloudinary Cloud: li8lgd5l
 
@@ -223,36 +225,80 @@ export const CLOUDINARY_MEDIA = {
   ]
 };
 
-// Function to dynamically fetch updated Cloudinary media from Backend API (if online)
-// Maps flat API keys (e.g. "elevation_01") into nested paths (e.g. elevations.elevation01)
-export async function getDynamicCloudMedia() {
+// Dynamic Media Cache and Real-Time Cross-Tab Synchronization
+let cachedMedia = null;
+const mediaListeners = new Set();
+let cmsMediaChannel = null;
+
+try {
+  if (typeof window !== 'undefined' && 'BroadcastChannel' in window) {
+    cmsMediaChannel = new BroadcastChannel('maytri_cms_sync_channel');
+    cmsMediaChannel.onmessage = (event) => {
+      if (event.data?.type === 'MEDIA_UPDATED' || event.data?.type === 'CONTENT_UPDATED') {
+        fetchWebsiteMedia();
+      }
+    };
+  }
+} catch (e) {
+  console.warn('BroadcastChannel not supported', e);
+}
+
+function applyMapToMedia(target, map) {
+  for (const [apiKey, url] of Object.entries(map)) {
+    const path = API_KEY_TO_NESTED_PATH[apiKey];
+    if (path && path.length === 1) {
+      target[path[0]] = url;
+    } else if (path && path.length === 2) {
+      if (target[path[0]] && typeof target[path[0]] === 'object' && !Array.isArray(target[path[0]])) {
+        target[path[0]][path[1]] = url;
+      }
+    }
+  }
+}
+
+export async function fetchWebsiteMedia() {
   try {
-    const res = await fetch(`${API_BASE_URL}/media`);
+    const baseUrl = getApiBaseUrl();
+    const res = await fetch(`${baseUrl}/media`);
     if (!res.ok) throw new Error('API fetch failed');
     const json = await res.json();
     if (json.success && json.map) {
-      // Deep clone the default media config
+      // Clone default media config
       const merged = JSON.parse(JSON.stringify(CLOUDINARY_MEDIA));
+      applyMapToMedia(merged, json.map);
 
-      // Apply API overrides using the key→path mapping
-      for (const [apiKey, url] of Object.entries(json.map)) {
-        const path = API_KEY_TO_NESTED_PATH[apiKey];
-        if (path && path.length === 1) {
-          // Top-level key (logo, heroPoster, etc.)
-          merged[path[0]] = url;
-        } else if (path && path.length === 2) {
-          // Nested key (elevations.elevation01, clubhouse.frontPanorama, etc.)
-          if (merged[path[0]] && typeof merged[path[0]] === 'object' && !Array.isArray(merged[path[0]])) {
-            merged[path[0]][path[1]] = url;
-          }
-        }
-      }
+      // Also mutate the exported CLOUDINARY_MEDIA in-place for static imports
+      applyMapToMedia(CLOUDINARY_MEDIA, json.map);
 
-      return merged;
+      cachedMedia = merged;
+      mediaListeners.forEach((fn) => fn(cachedMedia));
+      return cachedMedia;
     }
   } catch (err) {
-    // Graceful fallback to static Cloudinary CDN mappings
+    console.warn('Dynamic media fetch fallback to static:', err.message);
   }
-  return CLOUDINARY_MEDIA;
+  return cachedMedia || CLOUDINARY_MEDIA;
+}
+
+export async function getDynamicCloudMedia() {
+  return fetchWebsiteMedia();
+}
+
+export function useWebsiteMedia() {
+  const [media, setMedia] = useState(cachedMedia || CLOUDINARY_MEDIA);
+
+  useEffect(() => {
+    const listener = (newMedia) => setMedia(newMedia);
+    mediaListeners.add(listener);
+
+    // Initial fetch if not already cached
+    fetchWebsiteMedia();
+
+    return () => {
+      mediaListeners.delete(listener);
+    };
+  }, []);
+
+  return media;
 }
 

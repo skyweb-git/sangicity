@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Maximize2 } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 import { useWebsiteContent } from '../services/contentService';
 
 export default function ClubHouse({ onOpenLightbox }) {
   const websiteContent = useWebsiteContent();
+  const media = useWebsiteMedia();
   const clubhouseData = websiteContent?.clubhouse || {};
   const aboutData = websiteContent?.about || {};
 
@@ -15,43 +16,43 @@ export default function ClubHouse({ onOpenLightbox }) {
 
   const clubhouseImages = [
     {
-      src: CLOUDINARY_MEDIA.clubhouse?.frontPanorama || '/clubhouse/clubhouse_front_panorama.webp',
+      src: media.clubhouse?.frontPanorama || CLOUDINARY_MEDIA.clubhouse?.frontPanorama || '/clubhouse/clubhouse_front_panorama.webp',
       alt: 'Maytri Ambhuja 90,000 SFT Club House Grand Facade & Swimming Pool',
       title: '90,000 SFT Grand Club House & Pool',
       caption: 'World-Class Architecture with Temperature-Controlled Infinity Pool Deck'
     },
     {
-      src: CLOUDINARY_MEDIA.clubhouse?.poolAerial || '/clubhouse/clubhouse_pool_aerial.webp',
+      src: media.clubhouse?.poolAerial || CLOUDINARY_MEDIA.clubhouse?.poolAerial || '/clubhouse/clubhouse_pool_aerial.webp',
       alt: 'Maytri Ambhuja Club House Swimming Pool & Sun Deck',
       title: 'Resort Swimming Pool & Sun Deck',
       caption: 'Olympic Dimension Lap Pool with Private Cabanas & Loungers'
     },
     {
-      src: CLOUDINARY_MEDIA.clubhouse?.eveningElevation || '/clubhouse/clubhouse_evening_elevation.webp',
+      src: media.clubhouse?.eveningElevation || CLOUDINARY_MEDIA.clubhouse?.eveningElevation || '/clubhouse/clubhouse_evening_elevation.webp',
       alt: 'Maytri Ambhuja Evening Illuminated Club House Elevation',
       title: 'Evening Illumination & Poolside',
       caption: 'Breathtaking Night View with Poolside Reflection'
     },
     {
-      src: CLOUDINARY_MEDIA.clubhouse?.courtyardLawn || '/clubhouse/clubhouse_courtyard_lawn.webp',
+      src: media.clubhouse?.courtyardLawn || CLOUDINARY_MEDIA.clubhouse?.courtyardLawn || '/clubhouse/clubhouse_courtyard_lawn.webp',
       alt: 'Maytri Ambhuja Club House Landscaped Courtyard & Lawn',
       title: 'Landscaped Courtyard & Lawn',
       caption: 'Lush Green Promenade with Palm Trees and Seating Alcoves'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.pool || '/elevations/elevation_pool.webp',
+      src: media.elevations?.pool || CLOUDINARY_MEDIA.elevations?.pool || '/elevations/elevation_pool.webp',
       alt: 'Maytri Ambhuja Resort Swimming Pool & Deck',
       title: 'Resort Swimming Pool Deck',
       caption: 'Tropical Landscape and Poolside Relaxation Area'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.cricketPitch || '/elevations/elevation_cricket_pitch.webp',
+      src: media.elevations?.cricketPitch || CLOUDINARY_MEDIA.elevations?.cricketPitch || '/elevations/elevation_cricket_pitch.webp',
       alt: 'Maytri Ambhuja Professional Cricket Pitch & Sports Arena',
       title: 'Cricket Pitch & Outdoor Sports',
       caption: 'Professional Turf Pitch for Weekend Tournaments and Sports Enthusiasts'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.parkDay || '/elevations/elevation_park_day.webp',
+      src: media.elevations?.parkDay || CLOUDINARY_MEDIA.elevations?.parkDay || '/elevations/elevation_park_day.webp',
       alt: 'Maytri Ambhuja 4.5 Acres Central Park & Promenade',
       title: '4.5 Acres Central Park',
       caption: 'Expansive Serene Parkland with Jogging Tracks and Family Pavilions'

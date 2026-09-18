@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Layers, Maximize2, FileText, ArrowUpRight, Compass, Building, Sparkles, Home } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 
 export default function FloorPlans({ onOpenEnquiry, onOpenLightbox }) {
+  useWebsiteMedia();
   const [selectedConfig, setSelectedConfig] = useState('222-east');
   const [activeFloorTab, setActiveFloorTab] = useState('ground');
 

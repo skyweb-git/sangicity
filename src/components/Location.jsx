@@ -1,10 +1,11 @@
 import React from 'react';
 import { MapPin, Navigation, ExternalLink, Building, Compass } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 import { useWebsiteContent } from '../services/contentService';
 
 export default function Location() {
   const websiteContent = useWebsiteContent();
+  const media = useWebsiteMedia();
   const contactData = websiteContent?.contact || {};
 
   const siteAddress = contactData.siteAddress || "Survey no: 156, ORR Exit-11, Pedda Amberpet, Hyderabad, Telangana 501511.";
@@ -31,7 +32,7 @@ export default function Location() {
           {/* Left Column: Map Image Display */}
           <div className="location-map-frame">
             <img
-              src={CLOUDINARY_MEDIA.gallery[1].url}
+              src={media.gallery?.[1]?.url || CLOUDINARY_MEDIA.gallery[1].url}
               alt="Maytri Ambhuja aerial layout and strategic connectivity in Hyderabad"
               className="location-map-img"
               loading="lazy"

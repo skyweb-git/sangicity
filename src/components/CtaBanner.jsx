@@ -1,15 +1,17 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 
 export default function CtaBanner() {
+  const media = useWebsiteMedia();
+
   return (
     <section className="cta-banner-section">
       <div className="cta-banner">
         {/* Background video */}
         <video
-          src={CLOUDINARY_MEDIA.ctaVideo}
-          poster={CLOUDINARY_MEDIA.ctaPoster}
+          src={media.ctaVideo || CLOUDINARY_MEDIA.ctaVideo}
+          poster={media.ctaPoster || CLOUDINARY_MEDIA.ctaPoster}
           autoPlay
           loop
           muted

@@ -1,76 +1,77 @@
 import React, { useState } from 'react';
 import { Maximize2, Filter, Building, Sparkles, Trees, Trophy } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 
 export default function Elevations({ onOpenLightbox }) {
+  const media = useWebsiteMedia();
   const [activeFilter, setActiveFilter] = useState('all');
 
   const galleryItems = [
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation01 || '/elevations/elevation_01.webp',
+      src: media.elevations?.elevation01 || CLOUDINARY_MEDIA.elevations?.elevation01 || '/elevations/elevation_01.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Front Facade View 01',
       title: 'Modern Villa Front Facade',
       category: 'villas',
       badge: 'Villa Elevation 01'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation02 || '/elevations/elevation_02.webp',
+      src: media.elevations?.elevation02 || CLOUDINARY_MEDIA.elevations?.elevation02 || '/elevations/elevation_02.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Corner Angle View 02',
       title: 'Corner Villa Perspective',
       category: 'villas',
       badge: 'Villa Elevation 02'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation03 || '/elevations/elevation_03.webp',
+      src: media.elevations?.elevation03 || CLOUDINARY_MEDIA.elevations?.elevation03 || '/elevations/elevation_03.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Grand Modern View 03',
       title: 'Grand Contemporary Architecture',
       category: 'villas',
       badge: 'Villa Elevation 03'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation04 || '/elevations/elevation_04.webp',
+      src: media.elevations?.elevation04 || CLOUDINARY_MEDIA.elevations?.elevation04 || '/elevations/elevation_04.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Street Enclave View 04',
       title: 'Villa Enclave Streetscape',
       category: 'villas',
       badge: 'Villa Elevation 04'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation05 || '/elevations/elevation_05.webp',
+      src: media.elevations?.elevation05 || CLOUDINARY_MEDIA.elevations?.elevation05 || '/elevations/elevation_05.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Contemporary Architecture 05',
       title: 'Boutique Villa Elevation',
       category: 'villas',
       badge: 'Villa Elevation 05'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation06 || '/elevations/elevation_06.webp',
+      src: media.elevations?.elevation06 || CLOUDINARY_MEDIA.elevations?.elevation06 || '/elevations/elevation_06.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Private Garden Perspective 06',
       title: 'Private Garden Villa Elevation',
       category: 'villas',
       badge: 'Villa Elevation 06'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.elevation07 || '/elevations/elevation_07.webp',
+      src: media.elevations?.elevation07 || CLOUDINARY_MEDIA.elevations?.elevation07 || '/elevations/elevation_07.webp',
       alt: 'Maytri Ambhuja Luxury Villa Elevation - Terrace & Balcony View 07',
       title: 'Terrace & Balcony Architecture',
       category: 'villas',
       badge: 'Villa Elevation 07'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.pool || '/elevations/elevation_pool.webp',
+      src: media.elevations?.pool || CLOUDINARY_MEDIA.elevations?.pool || '/elevations/elevation_pool.webp',
       alt: 'Maytri Ambhuja 90,000 SFT Clubhouse Resort Swimming Pool & Deck',
       title: 'Resort Swimming Pool & Deck',
       category: 'clubhouse',
       badge: 'Clubhouse Amenity'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.cricketPitch || '/elevations/elevation_cricket_pitch.webp',
+      src: media.elevations?.cricketPitch || CLOUDINARY_MEDIA.elevations?.cricketPitch || '/elevations/elevation_cricket_pitch.webp',
       alt: 'Maytri Ambhuja Professional Cricket Pitch & Outdoor Sports Arena',
       title: 'Cricket Pitch & Sports Arena',
       category: 'amenities',
       badge: 'Outdoor Sports'
     },
     {
-      src: CLOUDINARY_MEDIA.elevations?.parkDay || '/elevations/elevation_park_day.webp',
+      src: media.elevations?.parkDay || CLOUDINARY_MEDIA.elevations?.parkDay || '/elevations/elevation_park_day.webp',
       alt: 'Maytri Ambhuja 4.5 Acres Central Park & Landscaped Promenade',
       title: '4.5 Acres Central Park (Day View)',
       category: 'amenities',

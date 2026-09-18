@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Shield, Phone, ArrowUpRight } from 'lucide-react';
-import { CLOUDINARY_MEDIA } from '../services/mediaConfig';
+import { CLOUDINARY_MEDIA, useWebsiteMedia } from '../services/mediaConfig';
 
 export default function Header({ onOpenEnquiry, onOpenBrochure }) {
+  const media = useWebsiteMedia();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -56,7 +57,7 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
         <div className="header-brand-group">
           <a href="#home" className="header-brand-secondary" onClick={(e) => handleNavClick(e, '#home')} title="Sanghi City">
             <img
-              src={CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
+              src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
               alt="Sanghi City Logo"
               className="header-secondary-logo-img"
             />
@@ -66,7 +67,7 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
 
           <a href="#home" className="header-brand" onClick={(e) => handleNavClick(e, '#home')} title="Ambhuja by Maytri">
             <img
-              src={CLOUDINARY_MEDIA.logo}
+              src={media.logo || CLOUDINARY_MEDIA.logo}
               alt="Ambhuja by Maytri Logo"
               className="header-logo-img"
             />
@@ -133,13 +134,13 @@ export default function Header({ onOpenEnquiry, onOpenBrochure }) {
           <div className="mobile-drawer-top">
             <div className="mobile-drawer-logo-wrap">
               <img
-                src={CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
+                src={media.sanghiLogo || CLOUDINARY_MEDIA.sanghiLogo || '/sanghicity-logo.png'}
                 alt="Sanghi City"
                 className="mobile-drawer-secondary-logo"
               />
               <div className="mobile-drawer-divider" aria-hidden="true" />
               <img
-                src={CLOUDINARY_MEDIA.logo}
+                src={media.logo || CLOUDINARY_MEDIA.logo}
                 alt="Ambhuja by Maytri"
                 className="mobile-drawer-logo"
               />
