@@ -30,14 +30,21 @@ const API_KEY_TO_NESTED_PATH = {
   heroVideo: ['heroVideo'],
   ctaVideo: ['ctaVideo'],
 
-  // Elevations
+  // Elevations (snake_case and camelCase)
   elevation_01: ['elevations', 'elevation01'],
+  elevation01: ['elevations', 'elevation01'],
   elevation_02: ['elevations', 'elevation02'],
+  elevation02: ['elevations', 'elevation02'],
   elevation_03: ['elevations', 'elevation03'],
+  elevation03: ['elevations', 'elevation03'],
   elevation_04: ['elevations', 'elevation04'],
+  elevation04: ['elevations', 'elevation04'],
   elevation_05: ['elevations', 'elevation05'],
+  elevation05: ['elevations', 'elevation05'],
   elevation_06: ['elevations', 'elevation06'],
+  elevation06: ['elevations', 'elevation06'],
   elevation_07: ['elevations', 'elevation07'],
+  elevation07: ['elevations', 'elevation07'],
   elevation_pool: ['elevations', 'pool'],
   elevation_cricket_pitch: ['elevations', 'cricketPitch'],
   elevation_park_day: ['elevations', 'parkDay'],
@@ -48,19 +55,34 @@ const API_KEY_TO_NESTED_PATH = {
   clubhouse_evening_elevation: ['clubhouse', 'eveningElevation'],
   clubhouse_courtyard_lawn: ['clubhouse', 'courtyardLawn'],
 
-  // Floor Plans
+  // Floor Plans (snake_case and camelCase)
   floorplan_222_east_ground: ['floorplans', 'east222Ground'],
+  east222Ground: ['floorplans', 'east222Ground'],
   floorplan_222_east_first: ['floorplans', 'east222First'],
+  east222First: ['floorplans', 'east222First'],
   floorplan_222_east_terrace: ['floorplans', 'east222Terrace'],
+  east222Terrace: ['floorplans', 'east222Terrace'],
+
   floorplan_222_west_ground: ['floorplans', 'west222Ground'],
+  west222Ground: ['floorplans', 'west222Ground'],
   floorplan_222_west_first: ['floorplans', 'west222First'],
+  west222First: ['floorplans', 'west222First'],
   floorplan_222_west_terrace: ['floorplans', 'west222Terrace'],
+  west222Terrace: ['floorplans', 'west222Terrace'],
+
   floorplan_300_east_ground: ['floorplans', 'east300Ground'],
+  east300Ground: ['floorplans', 'east300Ground'],
   floorplan_300_east_first: ['floorplans', 'east300First'],
+  east300First: ['floorplans', 'east300First'],
   floorplan_300_east_terrace: ['floorplans', 'east300Terrace'],
+  east300Terrace: ['floorplans', 'east300Terrace'],
+
   floorplan_300_west_ground: ['floorplans', 'west300Ground'],
+  west300Ground: ['floorplans', 'west300Ground'],
   floorplan_300_west_first: ['floorplans', 'west300First'],
+  west300First: ['floorplans', 'west300First'],
   floorplan_300_west_terrace: ['floorplans', 'west300Terrace'],
+  west300Terrace: ['floorplans', 'west300Terrace'],
 };
 
 const CLD = 'https://res.cloudinary.com/li8lgd5l/image/upload';
@@ -156,7 +178,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Hardwood Badminton Courts & Squash',
       category: 'Sports',
       tag: 'Sports Arena',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786519/maytri_ambhuja/gallery/gallery_005.jpg',
+      url: `${CLD}/v1789727206/maytri_ambhuja/gallery/gallery_005.jpg`,
     },
     {
       id: 6,
@@ -164,7 +186,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Hotel-Grade Hospitality for Relatives & Guests',
       category: 'Suites',
       tag: 'Guest Suites',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786520/maytri_ambhuja/gallery/gallery_006.jpg',
+      url: `${CLD}/v1789727207/maytri_ambhuja/gallery/gallery_006.jpg`,
     },
     {
       id: 7,
@@ -172,7 +194,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Safe, Monitored Edutainment for Toddlers & Kids',
       category: 'Kids Zone',
       tag: 'Kids Arena',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786522/maytri_ambhuja/gallery/gallery_007.jpg',
+      url: `${CLD}/v1789727208/maytri_ambhuja/gallery/gallery_007.jpg`,
     },
     {
       id: 8,
@@ -180,7 +202,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Recliner Seating for Private Movie Screenings',
       category: 'Entertainment',
       tag: 'Preview Theatre',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786523/maytri_ambhuja/gallery/gallery_008.jpg',
+      url: `${CLD}/v1789727209/maytri_ambhuja/gallery/gallery_008.jpg`,
     },
     {
       id: 9,
@@ -188,7 +210,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Cardio, Strength & Dedicated CrossFit Studio',
       category: 'Fitness',
       tag: 'Fitness Center',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786525/maytri_ambhuja/gallery/gallery_009.jpg',
+      url: `${CLD}/v1789727210/maytri_ambhuja/gallery/gallery_009.jpg`,
     },
     {
       id: 10,
@@ -196,7 +218,7 @@ export const CLOUDINARY_MEDIA = {
       subtitle: 'Panoramic 360° Views of Hyderabad Skyline',
       category: 'Lounge',
       tag: 'Sky Lounge',
-      url: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786526/maytri_ambhuja/gallery/gallery_010.jpg',
+      url: `${CLD}/v1789727211/maytri_ambhuja/gallery/gallery_010.jpg`,
     },
   ]
 };

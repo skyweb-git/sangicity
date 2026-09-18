@@ -12,7 +12,7 @@ export default function StructuredData() {
         "alternateName": ["Sanghi City Hyderabad", "Maytri Ambhuja", "Maytri Group"],
         "url": "https://www.sanghicity.in",
         "logo": "https://www.sanghicity.in/sanghicity-logo.png",
-        "image": "https://res.cloudinary.com/s8b4ps7b/image/upload/v1741544000/maytri/elevations/001.jpg",
+        "image": "https://res.cloudinary.com/li8lgd5l/image/upload/v1741544000/maytri/elevations/001.jpg",
         "telephone": "+91-40-24200456",
         "email": "sales@sanghicity.in",
         "description": "Maytri Group and Sanghi City develop premier luxury villa townships in Hyderabad, known for architectural excellence, 13+ years of dependability, and landmark communities.",
