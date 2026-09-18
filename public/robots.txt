@@ -1,0 +1,30 @@
+# Robots.txt for Sanghi City (sanghicity.in)
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+Allow: /assets/
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# XML Sitemap Directive
+Sitemap: https://www.sanghicity.in/sitemap.xml

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Primary Homepage & Luxury Township Overview -->
+  <url>
+    <loc>https://www.sanghicity.in/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/s8b4ps7b/image/upload/v1741544000/maytri/elevations/001.jpg</image:loc>
+      <image:title>Sanghi City Hyderabad Luxury Villa Township</image:title>
+      <image:caption>Sanghi City 55-Acre Gated Villa Township in Sanghi Nagar, Hyderabad by Maytri Group</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/s8b4ps7b/image/upload/v1741544000/maytri/clubhouse/001.jpg</image:loc>
+      <image:title>Sanghi City 90000 sq ft Luxury Clubhouse</image:title>
+      <image:caption>Resort-style luxury clubhouse and swimming pool deck at Sanghi City Hyderabad</image:caption>
+    </image:image>
+  </url>
+
+  <!-- About Developer & Project Legacy -->
+  <url>
+    <loc>https://www.sanghicity.in/#about</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Villa Floor Plans (222 & 300 SQ YDS East/West) -->
+  <url>
+    <loc>https://www.sanghicity.in/#floor-plans</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/s8b4ps7b/image/upload/v1741544000/maytri/floorplans/222_east.jpg</image:loc>
+      <image:title>222 SQ YDS East Facing Luxury Villa Floor Plan Sanghi City</image:title>
+      <image:caption>Ground, First, and Terrace Level Triplex Architectural Layout</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://res.cloudinary.com/s8b4ps7b/image/upload/v1741544000/maytri/floorplans/300_east.jpg</image:loc>
+      <image:title>300 SQ YDS East Facing Luxury Villa Floor Plan Sanghi City</image:title>
+    </image:image>
+  </url>
+
+  <!-- 90,000 Sft Clubhouse & 4.5 Acre Central Park -->
+  <url>
+    <loc>https://www.sanghicity.in/#clubhouse</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Villa Elevations & Landscape Gallery -->
+  <url>
+    <loc>https://www.sanghicity.in/#elevations</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- 16 World-Class Amenities -->
+  <url>
+    <loc>https://www.sanghicity.in/#amenities</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Technical Specifications & Construction Standards -->
+  <url>
+    <loc>https://www.sanghicity.in/#specifications</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Frequently Asked Questions (FAQ) -->
+  <url>
+    <loc>https://www.sanghicity.in/#faq</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Contact & Book Site Visit -->
+  <url>
+    <loc>https://www.sanghicity.in/#contact</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
