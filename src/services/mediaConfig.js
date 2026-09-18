@@ -92,7 +92,7 @@ const CLD = 'https://res.cloudinary.com/li8lgd5l/image/upload';
 export const CLOUDINARY_MEDIA = {
   // Brand & Logos
   logo: 'https://res.cloudinary.com/s8b4ps7b/image/upload/v1788786505/maytri_ambhuja/brand/ambhuja_logo.png',
-  sanghiLogo: `${CLD}/v1789729319/maytri_ambhuja/sanghiLogo.jpg`,
+  sanghiLogo: 'https://res.cloudinary.com/li8lgd5l/image/upload/v1789745531/maytri_ambhuja/sanghiLogo_1789745528219.png',
   heroPoster: `${CLD}/v1789727192/maytri_ambhuja/brand/hero_poster.jpg`,
   heroBgImage: `${CLD}/v1789727192/maytri_ambhuja/brand/hero_poster.jpg`,
   ctaPoster: `${CLD}/v1789727192/maytri_ambhuja/brand/cta_poster.jpg`,
@@ -226,7 +226,41 @@ export const CLOUDINARY_MEDIA = {
 };
 
 // Dynamic Media Cache and Real-Time Cross-Tab Synchronization
-let cachedMedia = null;
+const MEDIA_CACHE_KEY = 'maytri_website_media_cache_v2';
+
+function applyMapToMedia(target, map) {
+  if (!map || typeof map !== 'object') return;
+  for (const [apiKey, url] of Object.entries(map)) {
+    const path = API_KEY_TO_NESTED_PATH[apiKey];
+    if (path && path.length === 1) {
+      target[path[0]] = url;
+    } else if (path && path.length === 2) {
+      if (target[path[0]] && typeof target[path[0]] === 'object' && !Array.isArray(target[path[0]])) {
+        target[path[0]][path[1]] = url;
+      }
+    }
+  }
+}
+
+function getInitialCachedMedia() {
+  try {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem(MEDIA_CACHE_KEY);
+      if (stored) {
+        const map = JSON.parse(stored);
+        const merged = JSON.parse(JSON.stringify(CLOUDINARY_MEDIA));
+        applyMapToMedia(merged, map);
+        applyMapToMedia(CLOUDINARY_MEDIA, map);
+        return merged;
+      }
+    }
+  } catch (e) {
+    console.warn('Error reading media cache:', e);
+  }
+  return null;
+}
+
+let cachedMedia = getInitialCachedMedia();
 const mediaListeners = new Set();
 let cmsMediaChannel = null;
 
@@ -243,19 +277,6 @@ try {
   console.warn('BroadcastChannel not supported', e);
 }
 
-function applyMapToMedia(target, map) {
-  for (const [apiKey, url] of Object.entries(map)) {
-    const path = API_KEY_TO_NESTED_PATH[apiKey];
-    if (path && path.length === 1) {
-      target[path[0]] = url;
-    } else if (path && path.length === 2) {
-      if (target[path[0]] && typeof target[path[0]] === 'object' && !Array.isArray(target[path[0]])) {
-        target[path[0]][path[1]] = url;
-      }
-    }
-  }
-}
-
 export async function fetchWebsiteMedia() {
   try {
     const baseUrl = getApiBaseUrl();
@@ -269,6 +290,12 @@ export async function fetchWebsiteMedia() {
 
       // Also mutate the exported CLOUDINARY_MEDIA in-place for static imports
       applyMapToMedia(CLOUDINARY_MEDIA, json.map);
+
+      try {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem(MEDIA_CACHE_KEY, JSON.stringify(json.map));
+        }
+      } catch (e) {}
 
       cachedMedia = merged;
       mediaListeners.forEach((fn) => fn(cachedMedia));
@@ -285,13 +312,13 @@ export async function getDynamicCloudMedia() {
 }
 
 export function useWebsiteMedia() {
-  const [media, setMedia] = useState(cachedMedia || CLOUDINARY_MEDIA);
+  const [media, setMedia] = useState(() => cachedMedia || getInitialCachedMedia() || CLOUDINARY_MEDIA);
 
   useEffect(() => {
     const listener = (newMedia) => setMedia(newMedia);
     mediaListeners.add(listener);
 
-    // Initial fetch if not already cached
+    // Fetch in background for latest updates
     fetchWebsiteMedia();
 
     return () => {
