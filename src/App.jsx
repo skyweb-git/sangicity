@@ -18,8 +18,11 @@ import BrochureModal from './components/BrochureModal';
 import PrivacyModal from './components/PrivacyModal';
 import LeadWhatsAppModal from './components/LeadWhatsAppModal';
 import { Phone, MessageSquare } from 'lucide-react';
+import { useWebsiteContent } from './services/contentService';
 
 export default function App() {
+  // Sync global website content and dynamic theme styling
+  useWebsiteContent();
   // Modal states
   const [lightboxState, setLightboxState] = useState({
     isOpen: false,

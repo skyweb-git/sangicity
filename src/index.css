@@ -477,7 +477,7 @@ body {
 }
 
 .header-cta-btn:hover {
-  background: #0369a1;
+  background: var(--color-cyan-glow);
   transform: translateY(-1px);
 }
 
@@ -788,9 +788,9 @@ body {
   z-index: 3;
   background: linear-gradient(
     180deg,
-    rgba(7, 13, 31, 0.75) 0%,
-    rgba(11, 19, 43, 0.65) 50%,
-    rgba(7, 13, 31, 0.90) 100%
+    color-mix(in srgb, var(--color-primary-dark) 75%, transparent) 0%,
+    color-mix(in srgb, var(--color-primary) 65%, transparent) 50%,
+    color-mix(in srgb, var(--color-primary-dark) 90%, transparent) 100%
   );
 }
 
@@ -908,20 +908,20 @@ body {
 }
 
 .hero-btn--featured {
-  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  background: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-cyan-glow) 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.35);
   padding: 16px 36px;
   font-size: 17px;
   font-weight: 800;
   border-radius: var(--radius-full);
-  box-shadow: 0 8px 30px rgba(2, 132, 199, 0.45);
+  box-shadow: 0 8px 30px var(--shadow-glow, rgba(2, 132, 199, 0.45));
   transition: all 0.25s ease;
 }
 
 .hero-btn--featured:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 35px rgba(2, 132, 199, 0.6);
-  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  box-shadow: 0 12px 35px var(--shadow-glow, rgba(2, 132, 199, 0.6));
+  background: linear-gradient(135deg, var(--color-cyan-glow) 0%, var(--color-cyan) 100%);
 }
 
 /* Hero Highlights Strip */

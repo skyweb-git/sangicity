@@ -132,11 +132,189 @@ export const DEFAULT_CONTENT = {
         buttonText: 'For More Info'
       }
     ]
+  },
+  theme: {
+    presetName: 'Oceanic Sapphire (Default)',
+    accentColor: '#0284c7',
+    accentGlow: '#38bdf8',
+    accentSubtle: '#e0f2fe',
+    darkPrimary: '#0b132b',
+    darkNavy: '#111c36',
+    darkNavyLight: '#1c2847',
+    pageBg: '#f8f9fb',
+    surfaceBg: '#ffffff',
+    surfaceSubtle: '#f1f3f7',
+    textColor: '#111c36',
+    textMuted: '#52637f',
+    borderColor: '#e2e6ed'
   }
 };
 
+export function applyThemeToDocument(theme) {
+  if (typeof document === 'undefined' || !theme) return;
+  const root = document.documentElement;
+
+  if (theme.accentColor) {
+    root.style.setProperty('--color-cyan', theme.accentColor);
+    root.style.setProperty('--color-accent', theme.accentColor);
+    root.style.setProperty('--shadow-glow', `0 0 25px ${theme.accentColor}40`);
+  }
+  if (theme.accentGlow) {
+    root.style.setProperty('--color-cyan-glow', theme.accentGlow);
+  }
+  if (theme.accentSubtle) {
+    root.style.setProperty('--color-cyan-subtle', theme.accentSubtle);
+  }
+  if (theme.darkPrimary) {
+    root.style.setProperty('--color-primary', theme.darkPrimary);
+    root.style.setProperty('--color-primary-dark', theme.darkPrimary);
+  }
+  if (theme.darkNavy) {
+    root.style.setProperty('--color-navy', theme.darkNavy);
+  }
+  if (theme.darkNavyLight) {
+    root.style.setProperty('--color-navy-light', theme.darkNavyLight);
+  }
+  if (theme.pageBg) {
+    root.style.setProperty('--color-bg', theme.pageBg);
+  }
+  if (theme.surfaceBg) {
+    root.style.setProperty('--color-surface', theme.surfaceBg);
+  }
+  if (theme.surfaceSubtle) {
+    root.style.setProperty('--color-surface-subtle', theme.surfaceSubtle);
+  }
+  if (theme.borderColor) {
+    root.style.setProperty('--color-border', theme.borderColor);
+  }
+  if (theme.textColor) {
+    root.style.setProperty('--color-text-main', theme.textColor);
+  }
+  if (theme.textMuted) {
+    root.style.setProperty('--color-slate', theme.textMuted);
+  }
+
+  // Dynamic overrides style element for components with semi-transparent alphas
+  let dynamicStyle = document.getElementById('maytri-dynamic-theme-overrides');
+  if (!dynamicStyle) {
+    dynamicStyle = document.createElement('style');
+    dynamicStyle.id = 'maytri-dynamic-theme-overrides';
+    document.head.appendChild(dynamicStyle);
+  }
+
+  const darkNavy = theme.darkNavy || '#111c36';
+  const darkNavyLight = theme.darkNavyLight || '#1c2847';
+  const darkPrimary = theme.darkPrimary || '#0b132b';
+  const accent = theme.accentColor || '#0284c7';
+  const accentGlow = theme.accentGlow || '#38bdf8';
+  const accentSubtle = theme.accentSubtle || '#e0f2fe';
+  const pageBg = theme.pageBg || '#f8f9fb';
+
+  dynamicStyle.textContent = `
+    body {
+      background-color: ${pageBg} !important;
+    }
+    .maytri-app-root {
+      background-color: ${pageBg} !important;
+    }
+    .site-header--scrolled {
+      background: color-mix(in srgb, ${darkNavy} 88%, transparent) !important;
+      border-bottom: 1px solid color-mix(in srgb, ${darkNavy} 60%, white) !important;
+    }
+    .btn-primary {
+      background: ${darkNavy} !important;
+      border-color: ${darkNavyLight} !important;
+    }
+    .header-cta-btn {
+      background: ${accent} !important;
+    }
+    .header-cta-btn:hover {
+      background: ${accentGlow} !important;
+    }
+    .hero-btn--featured {
+      background: linear-gradient(135deg, ${accent} 0%, ${accentGlow} 100%) !important;
+      box-shadow: 0 8px 30px ${accent}66 !important;
+    }
+    .hero-btn--featured:hover {
+      background: linear-gradient(135deg, ${accentGlow} 0%, ${accent} 100%) !important;
+    }
+    .hero-media-overlay {
+      background: linear-gradient(
+        180deg,
+        color-mix(in srgb, ${darkPrimary} 75%, transparent) 0%,
+        color-mix(in srgb, ${darkNavy} 65%, transparent) 50%,
+        color-mix(in srgb, ${darkPrimary} 90%, transparent) 100%
+      ) !important;
+    }
+    .eyebrow-tag {
+      background: ${accentSubtle} !important;
+      color: ${accent} !important;
+      border-color: ${accent}33 !important;
+    }
+    .eyebrow-rera {
+      background: color-mix(in srgb, ${accent} 25%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 40%, transparent) !important;
+      color: ${accentGlow} !important;
+    }
+    .nav-active-dot {
+      background: ${accentGlow} !important;
+    }
+    .footer-map-container {
+      background: ${darkPrimary} !important;
+    }
+    .footer-exp-toggle-btn.active {
+      background: ${accent} !important;
+    }
+  `;
+}
+
+const CONTENT_CACHE_KEY = 'maytri_website_content_cache_v2';
+
+// Synchronous cache hydration from localStorage for instant, zero-flicker render
 let cachedContent = null;
+if (typeof window !== 'undefined') {
+  try {
+    const raw = localStorage.getItem(CONTENT_CACHE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        cachedContent = {
+          ...DEFAULT_CONTENT,
+          ...parsed,
+          projectsSection: {
+            ...DEFAULT_CONTENT.projectsSection,
+            ...(parsed.projectsSection || {}),
+            items: (Array.isArray(parsed.projectsSection?.items) && parsed.projectsSection.items.length > 0)
+              ? parsed.projectsSection.items
+              : DEFAULT_CONTENT.projectsSection.items
+          },
+          theme: {
+            ...DEFAULT_CONTENT.theme,
+            ...(parsed.theme || {})
+          }
+        };
+        applyThemeToDocument(cachedContent.theme);
+      }
+    }
+  } catch (e) {
+    console.warn('Error reading content cache from localStorage:', e);
+  }
+}
+
 const listeners = new Set();
+
+function updateAndPersistContent(newContent) {
+  cachedContent = newContent;
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(CONTENT_CACHE_KEY, JSON.stringify(newContent));
+    } catch (e) {}
+  }
+  if (newContent?.theme) {
+    applyThemeToDocument(newContent.theme);
+  }
+  listeners.forEach(fn => fn(cachedContent));
+}
 
 let cmsChannel = null;
 try {
@@ -144,11 +322,23 @@ try {
     cmsChannel = new BroadcastChannel('maytri_cms_sync_channel');
     cmsChannel.onmessage = (event) => {
       if (event.data && event.data.type === 'CONTENT_UPDATED' && event.data.content) {
-        cachedContent = {
+        const incoming = event.data.content;
+        const merged = {
           ...DEFAULT_CONTENT,
-          ...event.data.content
+          ...incoming,
+          projectsSection: {
+            ...DEFAULT_CONTENT.projectsSection,
+            ...(incoming.projectsSection || {}),
+            items: (Array.isArray(incoming.projectsSection?.items) && incoming.projectsSection.items.length > 0)
+              ? incoming.projectsSection.items
+              : DEFAULT_CONTENT.projectsSection.items
+          },
+          theme: {
+            ...DEFAULT_CONTENT.theme,
+            ...(incoming.theme || {})
+          }
         };
-        listeners.forEach(fn => fn(cachedContent));
+        updateAndPersistContent(merged);
       }
     };
   }
@@ -167,7 +357,7 @@ export async function fetchWebsiteContent() {
       const dbProjectItems = dbData.projectsSection?.items;
       const dbAmenityItems = dbData.amenitiesSection?.items;
 
-      cachedContent = {
+      const merged = {
         ...DEFAULT_CONTENT,
         ...dbData,
         hero: { ...DEFAULT_CONTENT.hero, ...(dbData.hero || {}) },
@@ -188,10 +378,14 @@ export async function fetchWebsiteContent() {
           items: (Array.isArray(dbProjectItems) && dbProjectItems.length > 0)
             ? dbProjectItems
             : DEFAULT_CONTENT.projectsSection.items
+        },
+        theme: {
+          ...DEFAULT_CONTENT.theme,
+          ...(dbData.theme || {})
         }
       };
-      listeners.forEach(fn => fn(cachedContent));
-      return cachedContent;
+      updateAndPersistContent(merged);
+      return merged;
     }
   } catch (err) {
     // Graceful fallback
@@ -199,12 +393,14 @@ export async function fetchWebsiteContent() {
   return cachedContent || DEFAULT_CONTENT;
 }
 
-
 export function useWebsiteContent() {
   const [content, setContent] = useState(cachedContent || DEFAULT_CONTENT);
 
   useEffect(() => {
-    fetchWebsiteContent().then(setContent);
+    fetchWebsiteContent().then((data) => {
+      setContent(data);
+      if (data?.theme) applyThemeToDocument(data.theme);
+    });
 
     const handler = (newContent) => setContent(newContent);
     listeners.add(handler);
