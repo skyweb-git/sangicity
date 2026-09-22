@@ -251,10 +251,46 @@ export function applyThemeToDocument(theme) {
       color: ${accent} !important;
       border-color: ${accent}33 !important;
     }
-    .eyebrow-rera {
-      background: color-mix(in srgb, ${accent} 25%, transparent) !important;
+    .eyebrow-pill {
+      background: color-mix(in srgb, ${accent} 20%, transparent) !important;
       border-color: color-mix(in srgb, ${accentGlow} 40%, transparent) !important;
       color: ${accentGlow} !important;
+      box-shadow: 0 2px 12px color-mix(in srgb, ${accent} 18%, transparent) !important;
+    }
+    .eyebrow-pill:hover {
+      background: color-mix(in srgb, ${accent} 30%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 60%, transparent) !important;
+    }
+    .eyebrow-rera {
+      background: color-mix(in srgb, ${accent} 20%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 40%, transparent) !important;
+      color: ${accentGlow} !important;
+      box-shadow: 0 2px 12px color-mix(in srgb, ${accent} 18%, transparent) !important;
+    }
+    .eyebrow-rera:hover {
+      background: color-mix(in srgb, ${accent} 30%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 60%, transparent) !important;
+    }
+    .rera-badge {
+      background: color-mix(in srgb, ${accent} 20%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 40%, transparent) !important;
+      color: #ffffff !important;
+      box-shadow: 0 2px 10px color-mix(in srgb, ${accent} 18%, transparent) !important;
+    }
+    .rera-badge:hover {
+      background: color-mix(in srgb, ${accent} 30%, transparent) !important;
+      border-color: color-mix(in srgb, ${accentGlow} 60%, transparent) !important;
+    }
+    .rera-badge strong {
+      color: ${accentGlow} !important;
+    }
+    .rera-badge .rera-icon {
+      color: ${accentGlow} !important;
+    }
+    .mobile-rera-tag {
+      background: ${accentSubtle} !important;
+      color: ${accent} !important;
+      border-color: ${accent}40 !important;
     }
     .nav-active-dot {
       background: ${accentGlow} !important;
